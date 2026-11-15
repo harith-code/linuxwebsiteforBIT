@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#16181d" />
+    <title>Penguin Hub · Linux Community</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="server-rail" aria-label="Community">
+        <div class="server-mark" aria-hidden="true">🐧</div>
+        <div class="rail-divider"></div>
+        <button class="server-mark active" type="button" aria-label="Penguin Hub">PH</button>
+        <button class="add-server" type="button" aria-label="Add a community" title="More communities soon">+</button>
+      </aside>
+
+      <aside class="channel-sidebar">
+        <header class="community-heading">
+          <div>
+            <p class="eyebrow">COLLEGE LINUX COMMUNITY</p>
+            <h1>Penguin Hub</h1>
+          </div>
+          <span class="online-dot" title="Community chat"></span>
+        </header>
+
+        <div class="sidebar-section">
+          <p class="section-label">TEXT CHANNELS</p>
+          <nav id="channel-list" class="channel-list" aria-label="Text channels"></nav>
+        </div>
+
+        <footer class="profile-card">
+          <div class="avatar" id="profile-avatar">?</div>
+          <div class="profile-copy">
+            <span class="profile-name" id="profile-name">Connecting…</span>
+            <span class="profile-status">Linux community member</span>
+          </div>
+          <button class="profile-edit" id="change-name" type="button" title="Change display name" aria-label="Change display name">···</button>
+        </footer>
+      </aside>
+
+      <section class="chat-panel" aria-label="Community chat">
+        <header class="chat-header">
+          <div class="channel-title">
+            <span class="hash-mark" aria-hidden="true">#</span>
+            <h2 id="active-channel-name">general</h2>
+          </div>
+          <p class="channel-topic" id="channel-topic">A place for Linux conversations and community news.</p>
+        </header>
+
+        <div class="status-banner" id="status-banner" role="status" hidden></div>
+        <ol class="message-list" id="message-list" aria-live="polite" aria-label="Messages"></ol>
+
+        <form class="composer" id="message-form">
+          <label class="sr-only" for="message-input">Message #general</label>
+          <input id="message-input" name="message" maxlength="2000" autocomplete="off" placeholder="Message #general" disabled />
+          <button class="send-button" type="submit" aria-label="Send message" disabled>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 20.4 21 12 3.4 3.6 3 10l12 2-12 2 .4 6.4Z" /></svg>
+          </button>
+        </form>
+        <p class="composer-hint">Share what you’re learning. Be kind and help each other out.</p>
+      </section>
+    </main>
+
+    <dialog id="name-dialog" class="name-dialog">
+      <form id="name-form" method="dialog">
+        <div class="dialog-icon" aria-hidden="true">🐧</div>
+        <p class="eyebrow">WELCOME TO PENGUIN HUB</p>
+        <h2>Pick a display name</h2>
+        <p class="dialog-description">Choose how you’ll appear in the college Linux community chat.</p>
+        <label for="name-input">Display name</label>
+        <input id="name-input" name="displayName" maxlength="32" minlength="2" required autocomplete="nickname" placeholder="e.g. kernel_kid" />
+        <button class="join-button" type="submit">Join the conversation</button>
+      </form>
+    </dialog>
+  </body>
+</html>

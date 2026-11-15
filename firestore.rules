@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function validMessage(channelId) {
+      return channelId in ['general', 'help', 'projects', 'events']
+        && request.resource.data.keys().hasAll(['authorUid', 'authorName', 'text', 'createdAt'])
+        && request.resource.data.keys().hasOnly(['authorUid', 'authorName', 'text', 'createdAt'])
+        && request.resource.data.authorUid == request.auth.uid
+        && request.resource.data.authorName is string
+        && request.resource.data.authorName.size() >= 2
+        && request.resource.data.authorName.size() <= 32
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 2000
+        && request.resource.data.createdAt == request.time;
+    }
+
+    match /channels/{channelId}/messages/{messageId} {
+      allow read: if signedIn() && channelId in ['general', 'help', 'projects', 'events'];
+      allow create: if signedIn() && validMessage(channelId);
+      allow delete: if signedIn() && resource.data.authorUid == request.auth.uid;
+      allow update: if false;
+    }
+  }
+}
